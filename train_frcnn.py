@@ -202,6 +202,7 @@ model_classifier.compile(optimizer=optimizer_classifier, loss=[losses.class_loss
 model_all.compile(optimizer='sgd', loss='mae')
 
 epoch_length = int(options.epoch_length)
+print(epoch_length)
 num_epochs = int(options.num_epochs)
 iter_num = 0
 
