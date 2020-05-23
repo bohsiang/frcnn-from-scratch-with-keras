@@ -203,7 +203,8 @@ model_rpn.compile(optimizer=optimizer, loss=[losses.rpn_loss_cls(num_anchors), l
 model_classifier.compile(optimizer=optimizer_classifier, loss=[losses.class_loss_cls, losses.class_loss_regr(len(classes_count)-1)], metrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
 model_all.compile(optimizer='sgd', loss='mae')
 
-print(epoch_length)
+print(options)
+print(options.epoch_length)
 epoch_length = int(options.epoch_length)
 print(epoch_length)
 num_epochs = int(options.num_epochs)
