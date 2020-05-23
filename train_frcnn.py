@@ -37,6 +37,7 @@ parser.add_option("--hf", dest="horizontal_flips", help="Augment with horizontal
 parser.add_option("--vf", dest="vertical_flips", help="Augment with vertical flips in training. (Default=false).", action="store_true", default=False)
 parser.add_option("--rot", "--rot_90", dest="rot_90", help="Augment with 90 degree rotations in training. (Default=false).",
 				  action="store_true", default=False)
+#parser.add_option("--num_epochs", type="int", dest="num_epochs", help="Number of epochs.", default=50)
 parser.add_option("--num_epochs", type="int", dest="num_epochs", help="Number of epochs.", default=50)
 parser.add_option("--config_filename", dest="config_filename", help=
 				"Location to store all the metadata related to the training (to be used when testing).",
@@ -45,7 +46,8 @@ parser.add_option("--output_weight_path", dest="output_weight_path", help="Outpu
 parser.add_option("--input_weight_path", dest="input_weight_path", help="Input path for weights. If not specified, will try to load default weights provided by keras.", default=None)
 parser.add_option("--rpn", dest="rpn_weight_path", help="Input path for rpn.", default=None)
 parser.add_option("--opt", dest="optimizers", help="set the optimizer to use", default="SGD")
-parser.add_option("--elen", dest="epoch_length", help="set the epoch length. def=1000", default=1000)
+#parser.add_option("-e","--elen", dest="epoch_length", help="set the epoch length. def=1000", default=1000)
+parser.add_option("--elen", dest="epoch_length", help="set the epoch length. def=1000")
 parser.add_option("--load", dest="load", help="What model to load", default=None)
 parser.add_option("--dataset", dest="dataset", help="name of the dataset", default="voc")
 parser.add_option("--cat", dest="cat", help="categroy to train on. default train on all cats.", default=None)
@@ -201,6 +203,7 @@ model_rpn.compile(optimizer=optimizer, loss=[losses.rpn_loss_cls(num_anchors), l
 model_classifier.compile(optimizer=optimizer_classifier, loss=[losses.class_loss_cls, losses.class_loss_regr(len(classes_count)-1)], metrics={'dense_class_{}'.format(len(classes_count)): 'accuracy'})
 model_all.compile(optimizer='sgd', loss='mae')
 
+print(epoch_length)
 epoch_length = int(options.epoch_length)
 print(epoch_length)
 num_epochs = int(options.num_epochs)
